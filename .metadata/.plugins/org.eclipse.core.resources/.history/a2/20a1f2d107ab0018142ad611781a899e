@@ -1,0 +1,57 @@
+package java.com.sabrina.interview.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.floppy.clinidario.dao.AppointmentDAO;
+import com.floppy.clinidario.dao.DoctorDAO;
+import com.floppy.clinidario.model.Doctor;
+import com.floppy.clinidario.model.HeathInsurance;
+import com.floppy.clinidario.model.Pacient;
+
+@Controller
+@RequestMapping("/appointment")
+public class AppointmentController {
+	@Autowired
+	private AppointmentDAO appointmentDAO;
+
+	@RequestMapping(value = "/getAppointmentByHeathInsuranceAndDoctor/{idHealthInsurance}/{crmDoctor}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody HeathInsurance getAppointmentByHeathInsuranceAndDoctor(
+			@PathVariable("idHealthInsurance") Integer idHealthInsurance,
+			@PathVariable("crmDoctor") String crmDoctor) {
+		return appointmentDAO.getAppointmentByHeathInsuranceAndDoctor(idHealthInsurance, crmDoctor);
+	}
+
+	@RequestMapping(value = "/insertAppointmentPacient/", method = RequestMethod.POST)
+	public ResponseEntity<Void> insertAppointmentPacient(@RequestBody Pacient pacient) {
+		appointmentDAO.insertAppointmentPacient(pacient);
+		return new ResponseEntity<Void>(HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value = "/getAppointmentByCPF/{cpf}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody HeathInsurance getAppointmentByCPF(
+			@PathVariable("cpf") String cpf) {
+		return appointmentDAO.getAppointmentByCPF(cpf);
+	}
+	@RequestMapping(value = "/insertAppointmentDoctor/", method = RequestMethod.POST)
+	public ResponseEntity<Void> insertAppointmentPacient(@RequestBody HeathInsurance hi) {
+		appointmentDAO.insertAppointmentDoctor(hi);
+		return new ResponseEntity<Void>(HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value = "/cancelAppointmentPacientById/{id}", method = RequestMethod.POST)
+	public ResponseEntity<Void> cancelAppointmentPacientById(@PathVariable("id") Integer id) {
+		appointmentDAO.cancelAppointmentPacientById(id);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+}

@@ -1,0 +1,121 @@
+package java.com.sabrina.interview.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.springframework.stereotype.Repository;
+
+import com.floppy.clinidario.mock.Mocks;
+import com.floppy.clinidario.model.Appointment;
+import com.floppy.clinidario.model.Doctor;
+import com.floppy.clinidario.model.HeathInsurance;
+
+@Repository
+public class DoctorDAO {
+	Mocks mock = new Mocks();
+
+	HealthInsuranceDAO heathInsuranceServ = new HealthInsuranceDAO();
+	static{
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DoctorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+	public List<Doctor> getDoctors() {
+		Doctor doc = new Doctor();
+        List<Doctor> lista = new ArrayList<Doctor>();
+        try (Connection c = DriverManager.getConnection("jdbc:postgresql://localhost/appointment", "postgres", "vilvert01")) {
+            String query = "SELECT * FROM doctor";
+            PreparedStatement stm = c.prepareStatement(query);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+            		doc = new Doctor();
+            		doc.setCrm(rs.getString("crm"));
+            		doc.setCellphone(rs.getString("cellphone"));
+            		doc.setName(rs.getString("name"));
+            		doc.setEmail(rs.getString("email"));
+            		doc.setId(rs.getString("id"));
+                lista.add(doc);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Nao foi possivel conectar", e);
+        }
+        return lista;
+        
+	}
+
+	public List<Doctor> getDoctorsByHeathInsurance(Integer idHeathInsurance) {
+		
+			Doctor doc = new Doctor();
+			List<Doctor> docList = new ArrayList<Doctor>();
+
+			try (Connection c = DriverManager.getConnection("jdbc:postgresql://localhost/appointment", "postgres",
+					"vilvert01")) {
+				String query = "SELECT * \n" + 
+						"	FROM doctor\n" + 
+						"	inner JOIN doctorandHI ON doctorandHI.fk_idheathIns = ? and doctorandHI.fk_crmdoctor = doctor.crm;";
+				PreparedStatement stm = c.prepareStatement(query);
+	            stm.setInt(1, idHeathInsurance);
+				ResultSet rs = stm.executeQuery();
+				while (rs.next()) {
+					doc = new Doctor();
+					
+					doc.setName(rs.getString("name"));
+					doc.setCrm(rs.getString("crm"));
+					doc.setEmail(rs.getString("email"));
+					doc.setId(rs.getString("id"));
+					docList.add(doc);
+				}
+			} catch (SQLException e) {
+				throw new RuntimeException("Nao foi possivel conectar", e);
+			}
+			return docList;
+		}
+//		List<HeathInsurance> heathInsuranceList = heathInsuranceServ.getHeathInsurance();
+//		
+//		for(HeathInsurance hi: heathInsuranceList) {
+//			if(hi.getId().equals(idHeathInsurance)) {
+//				return hi.getDoctorList();
+//			}
+//		}
+//		return null;
+//	}
+
+	public List<Doctor> getDoctorsByHeathInsuranceAndSpeciality(Integer idHeathInsurance, String idSpeciality) {
+		List<HeathInsurance> heathInsuranceList = heathInsuranceServ.getHeathInsurance();
+		List<Doctor> doctorList = new ArrayList<Doctor>();
+		for(HeathInsurance hi: heathInsuranceList) {
+			List<Doctor> dList = hi.getDoctorList();
+			if(hi.getId() == idHeathInsurance) {
+				for(Doctor d: dList) {
+					if(d.getSpecialty().getId() == idSpeciality) {
+						doctorList.add(d);
+					}
+				}
+				return doctorList;
+			}
+		}
+		return null;
+	}
+
+	public Appointment getAppointmentByDoctor(String IdDoctor) {
+		
+		List<Doctor> docList = mock.getDoctorsList();
+		for(Doctor doc : docList) {
+			if(doc.getId().equals(IdDoctor)) {
+				return doc.getAppointment();
+			}
+		}
+		
+		return null;
+	}
+
+}

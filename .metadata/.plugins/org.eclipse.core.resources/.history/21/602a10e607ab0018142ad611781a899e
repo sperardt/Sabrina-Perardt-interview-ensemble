@@ -1,0 +1,111 @@
+package java.com.sabrina.interview.mock;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.floppy.clinidario.model.Appointment;
+import com.floppy.clinidario.model.Doctor;
+import com.floppy.clinidario.model.HeathInsurance;
+import com.floppy.clinidario.model.Speciality;
+
+
+public class Mocks {
+	public HeathInsurance getHeathInsure(Double discount, Integer id, String name) {
+		HeathInsurance hi = new HeathInsurance();
+		
+		hi.setDiscount(discount);
+		hi.setId(id);
+		hi.setName(name);
+		hi.setDoctorList(null);
+		
+		return hi;
+	}
+	
+	public List<HeathInsurance> getHeathInsureList () {
+		List<HeathInsurance> heathInsuranceList = new ArrayList<HeathInsurance>();
+		
+		Speciality speciality = new Speciality();
+		speciality.setName("Ginecologista");
+		speciality.setId("2");
+		
+		Doctor doc = new Doctor();
+		doc.setName("Ana Maria Silva");
+		doc.setSpecialty(speciality);
+		
+		heathInsuranceList.add(this.getHeathInsure(0.0, 1, "Particular", doc));
+		heathInsuranceList.add(this.getHeathInsure(0.0, 1, "Particular", null));
+		heathInsuranceList.add(this.getHeathInsure(0.0, 3, "Bradesco", null));
+		
+		return heathInsuranceList;
+	}
+	
+	public HeathInsurance getHeathInsure(Double discount, Integer id, String name, Doctor doc) {
+		HeathInsurance hi = new HeathInsurance();
+		
+		hi.setDiscount(discount);
+		hi.setId(id);
+		hi.setName(name);
+		
+		List<Doctor> docList = new ArrayList<Doctor>();
+		docList.add(doc);
+		
+		hi.setDoctorList(docList);
+		
+		return hi;
+	}
+	public List<Speciality> getSpecialityList () {
+		List<Speciality> specialityList = new ArrayList<Speciality>();
+
+		specialityList.add(this.getSpeciality("1", "Clinico Geral"));
+		specialityList.add(this.getSpeciality("2", "Ginecologista"));
+		specialityList.add(this.getSpeciality("3", "Cirurgiao"));
+		
+		return specialityList;
+	}
+	
+	public Speciality getSpeciality(String id, String name) {
+		Speciality speciality = new Speciality();
+
+		speciality.setId(id);
+		speciality.setName(name);
+		
+		return speciality;
+	}
+	
+	public List<Doctor> getDoctorsList () {
+		List<Doctor> doctorList = new ArrayList<Doctor>();
+		
+		Speciality speciality = new Speciality();
+		speciality.setName("Ginecologista");
+		speciality.setId("2");
+		
+		Appointment appList = this.buildAppointment();
+		
+		doctorList.add(this.getDoctor("1","123-sc", "Jose da Silva", null, null));
+		doctorList.add(this.getDoctor("2","345-sc", "Maria dos Santos", null, null));
+		doctorList.add(this.getDoctor("3","343-PR", "Ana Maria Silva", speciality, appList));
+		
+		return doctorList;
+	}
+	
+	public Doctor getDoctor(String id, String crm, String name, Speciality specialty, Appointment app) {
+		Doctor doctor = new Doctor();
+		doctor.setId(id);
+		doctor.setCrm(crm);
+		doctor.setName(name);
+		doctor.setSpecialty(specialty);
+		doctor.setAppointment(app);
+		return doctor;
+	}
+	private Appointment buildAppointment(){
+		Appointment app = new Appointment();
+		
+		app.setDate("2017-09-19");
+		app = new Appointment();
+		app.setDate("2017-09-29");
+		
+	
+		
+		return app;
+	}
+}

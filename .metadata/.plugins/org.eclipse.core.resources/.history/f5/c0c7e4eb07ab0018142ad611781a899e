@@ -1,0 +1,33 @@
+package java.com.sabrina.interview.model;
+
+public class Appointment {
+
+	private String date;
+	private String hour;
+	private Integer id;
+	
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public String getHour() {
+		return hour;
+	}
+
+	public void setHour(String hour) {
+		this.hour = hour;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
+}

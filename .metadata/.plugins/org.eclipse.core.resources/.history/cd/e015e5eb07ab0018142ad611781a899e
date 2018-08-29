@@ -1,0 +1,18 @@
+package java.com.sabrina.interview.model;
+
+import java.io.Serializable;
+
+public class Pacient extends Person implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	private Doctor doctor;
+	
+	public Doctor getDoctor() {
+		return doctor;
+	}
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
+	}
+
+	
+}

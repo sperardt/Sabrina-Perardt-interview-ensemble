@@ -1,0 +1,33 @@
+package java.com.sabrina.interview.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.floppy.clinidario.dao.HealthInsuranceDAO;
+import com.floppy.clinidario.model.HeathInsurance;
+
+//import com.floppy.clinidario.dao.HeathInsuranceService;
+//import com.floppy.clinidario.model.HeathInsurance;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+
+
+@Controller
+@RequestMapping("/healthInsurance")
+public class HealthInsuranceController {
+//	@Autowired
+//	HeathInsuranceService heathInsuranceService;
+	 @Autowired
+	    private HealthInsuranceDAO healthInsuranceDAO;
+	
+	@RequestMapping(value="/getHealthInsurances/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE) 
+	 public @ResponseBody List<HeathInsurance>  getHeathInsurance() {
+		 //List<Employee> list = employeeDAO.getAllEmployees();
+	        return healthInsuranceDAO.getHeathInsurance();
+	  }
+}

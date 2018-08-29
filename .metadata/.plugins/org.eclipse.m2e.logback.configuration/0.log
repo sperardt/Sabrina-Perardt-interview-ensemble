@@ -1,0 +1,49 @@
+2018-08-28 11:32:53,202 [Worker-0] WARN  org.eclipse.jgit.util.FS - Exception caught during execution of command '[git, --version]' in '/usr/bin', return code '1', error message 'xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
+'
+2018-08-28 14:10:41,955 [Worker-4] WARN  org.eclipse.jgit.util.FS - Exception caught during execution of command '[git, --version]' in '/usr/bin', return code '1', error message 'xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
+'
+2018-08-28 14:16:45,602 [Worker-11] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: com.sabrina:SabrinaInterview:0.0.1-SNAPSHOT @ /Users/sabrinaperardt/Sabrina-Perardt-interview-ensemble/sabrina-perardt-interview-ensemble/pom.xml.
+2018-08-28 14:16:46,681 [Worker-11] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Not adding source folder /sabrina-perardt-interview-ensemble/src/main/java because it overlaps with /sabrina-perardt-interview-ensemble/src
+2018-08-28 14:16:46,681 [Worker-11] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Not adding source folder /sabrina-perardt-interview-ensemble/src/test/java because it overlaps with /sabrina-perardt-interview-ensemble/src
+2018-08-28 14:16:47,503 [Worker-11] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 2 sec
+2018-08-28 14:16:48,114 [Worker-8] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-08-28 14:16:48,115 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sabrinaperardt/Sabrina-Perardt-interview-ensemble/sabrina-perardt-interview-ensemble/src/main/resources
+2018-08-28 14:16:48,122 [Worker-8] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-08-28 14:16:48,123 [Worker-8] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sabrinaperardt/Sabrina-Perardt-interview-ensemble/sabrina-perardt-interview-ensemble/src/test/resources
+2018-08-28 14:17:04,049 [Worker-22] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2018-08-28 14:17:04,307 [Worker-22] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.maven.ide.eclipse.wtp.WarLifecycleMapping lifecycle mapping for MavenProject: com.sabrina:SabrinaInterview:0.0.1-SNAPSHOT @ /Users/sabrinaperardt/Sabrina-Perardt-interview-ensemble/sabrina-perardt-interview-ensemble/pom.xml.
+2018-08-28 14:17:04,869 [Worker-22] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Not adding source folder /sabrina-perardt-interview-ensemble/src/main/java because it overlaps with /sabrina-perardt-interview-ensemble/src
+2018-08-28 14:17:04,869 [Worker-22] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Not adding source folder /sabrina-perardt-interview-ensemble/src/test/java because it overlaps with /sabrina-perardt-interview-ensemble/src
+2018-08-28 14:17:05,236 [Worker-22] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Cleaning filtered folder for sabrina-perardt-interview-ensemble
+2018-08-28 14:17:05,244 [Worker-22] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed: 1 sec
+2018-08-28 14:17:05,653 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-08-28 14:17:05,654 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sabrinaperardt/Sabrina-Perardt-interview-ensemble/sabrina-perardt-interview-ensemble/src/main/resources
+2018-08-28 14:17:05,657 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-08-28 14:17:05,658 [Worker-6] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sabrinaperardt/Sabrina-Perardt-interview-ensemble/sabrina-perardt-interview-ensemble/src/test/resources
+2018-08-28 14:17:05,659 [Worker-6] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Changed resources require a complete clean of filtered resources of sabrina-perardt-interview-ensemble
+2018-08-28 14:17:05,661 [Worker-6] INFO  o.e.m.w.i.f.ResourceFilteringBuildParticipant - Executing resource filtering for sabrina-perardt-interview-ensemble
+2018-08-28 14:17:05,677 [Worker-6] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-08-28 14:17:30,276 [Worker-19] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-08-28 14:17:30,277 [Worker-19] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sabrinaperardt/Sabrina-Perardt-interview-ensemble/sabrina-perardt-interview-ensemble/src/main/resources
+2018-08-28 14:17:30,279 [Worker-19] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-08-28 14:17:30,283 [Worker-19] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sabrinaperardt/Sabrina-Perardt-interview-ensemble/sabrina-perardt-interview-ensemble/src/test/resources
+2018-08-28 14:17:51,273 [Worker-5] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-08-28 14:17:51,274 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sabrinaperardt/Sabrina-Perardt-interview-ensemble/sabrina-perardt-interview-ensemble/src/main/resources
+2018-08-28 14:17:51,275 [Worker-5] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-08-28 14:17:51,280 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sabrinaperardt/Sabrina-Perardt-interview-ensemble/sabrina-perardt-interview-ensemble/src/test/resources
+2018-08-28 14:18:17,492 [Worker-22] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-08-28 14:18:17,493 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sabrinaperardt/Sabrina-Perardt-interview-ensemble/sabrina-perardt-interview-ensemble/src/main/resources
+2018-08-28 14:18:17,495 [Worker-22] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-08-28 14:18:17,498 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sabrinaperardt/Sabrina-Perardt-interview-ensemble/sabrina-perardt-interview-ensemble/src/test/resources
+2018-08-28 14:18:25,113 [Worker-26] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-08-28 14:18:25,114 [Worker-26] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sabrinaperardt/Sabrina-Perardt-interview-ensemble/sabrina-perardt-interview-ensemble/src/main/resources
+2018-08-28 14:18:25,115 [Worker-26] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-08-28 14:18:25,119 [Worker-26] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sabrinaperardt/Sabrina-Perardt-interview-ensemble/sabrina-perardt-interview-ensemble/src/test/resources
+2018-08-28 14:18:34,833 [Worker-7] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-08-28 14:18:34,834 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sabrinaperardt/Sabrina-Perardt-interview-ensemble/sabrina-perardt-interview-ensemble/src/main/resources
+2018-08-28 14:18:34,835 [Worker-7] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-08-28 14:18:34,839 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sabrinaperardt/Sabrina-Perardt-interview-ensemble/sabrina-perardt-interview-ensemble/src/test/resources
+2018-08-28 14:19:57,599 [Worker-20] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-08-28 14:19:57,600 [Worker-20] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sabrinaperardt/Sabrina-Perardt-interview-ensemble/sabrina-perardt-interview-ensemble/src/main/resources
+2018-08-28 14:19:57,601 [Worker-20] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2018-08-28 14:19:57,602 [Worker-20] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sabrinaperardt/Sabrina-Perardt-interview-ensemble/sabrina-perardt-interview-ensemble/src/test/resources

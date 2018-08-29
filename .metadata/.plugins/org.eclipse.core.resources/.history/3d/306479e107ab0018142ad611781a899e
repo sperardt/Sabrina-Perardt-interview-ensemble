@@ -1,0 +1,203 @@
+package java.com.sabrina.interview.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.springframework.stereotype.Repository;
+
+import com.floppy.clinidario.model.Appointment;
+import com.floppy.clinidario.model.Doctor;
+import com.floppy.clinidario.model.HeathInsurance;
+import com.floppy.clinidario.model.Pacient;
+
+@Repository
+public class AppointmentDAO {
+	
+	static {
+		try {
+			Class.forName("org.postgresql.Driver");
+		} catch (ClassNotFoundException ex) {
+			Logger.getLogger(DoctorDAO.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+
+	public HeathInsurance getAppointmentByHeathInsuranceAndDoctor(Integer idHealthInsurance, String crmDoctor) {
+		Appointment ap = new Appointment();
+		HeathInsurance hi = new HeathInsurance();
+		Doctor doc = new Doctor();
+		List<Doctor> docList = new ArrayList<Doctor>();
+		
+		try (Connection c = DriverManager.getConnection("jdbc:postgresql://localhost/appointment", "postgres",
+				"vilvert01")) {
+			String query = "SELECT HealthInsurance.name AS nameHi, doctor.name AS nameDoc, doctor.crm, appointment.dateandhour, appointment.id\n" + 
+					"FROM (appointment\n" + 
+					"INNER JOIN doctor ON appointment.fk_crmdoctor = doctor.crm and appointment.fk_crmdoctor = ?) \n" + 
+					"INNER JOIN HealthInsurance ON HealthInsurance.id = appointment.fk_idheathIns and HealthInsurance.id = ? where appointment.fk_cpfPacient IS NULL;";
+			
+			PreparedStatement stm = c.prepareStatement(query);
+			stm.setString(1, crmDoctor);
+			stm.setInt(2, idHealthInsurance);
+			
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				doc = new Doctor();
+				ap = new Appointment();
+				hi.setName(rs.getString("nameHi"));
+				
+				doc.setName(rs.getString("nameDoc"));
+				doc.setCrm(rs.getString("crm"));
+				
+				ap.setDate(rs.getString("dateandhour").substring(0,10));
+				ap.setHour(rs.getString("dateandhour").substring(11,16));
+				ap.setId(rs.getInt("id"));
+				//apList.add(ap);
+				doc.setAppointment(ap);
+				docList.add(doc);
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("Nao foi possivel conectar", e);
+		}
+		
+		//docList.add(doc);
+		//doc.setAppointment(ap);
+		hi.setDoctorList(docList);
+		return hi;
+	}
+
+	public void insertAppointmentPacient(Pacient pacient) {		
+		try (Connection c = DriverManager.getConnection("jdbc:postgresql://localhost/appointment", "postgres",
+				"vilvert01")) {
+			String query = "select COUNT(*) from pacient  where cpf=?";
+			PreparedStatement stm = c.prepareStatement(query);
+			stm.setString(1, pacient.getCpf());
+			ResultSet rs = stm.executeQuery();
+			String query2 = "";
+			if(rs.next()) {
+				int soma = rs.getInt("count");
+				PreparedStatement stm2;
+				if (soma == 0) {
+					query2 = "INSERT INTO pacient (name, cpf, cellphone, email) VALUES(?, ?, ?, ?)";
+					 stm2 = c.prepareStatement(query2);
+					stm2.setString(1,pacient.getName());
+					stm2.setString(2, pacient.getCpf());
+					//stm2.setString(3, pacient.getPhone());
+					stm2.setString(3, pacient.getCellphone());
+					stm2.setString(4, pacient.getEmail());
+				}
+				else {
+					query2 = "UPDATE pacient SET name= ? , cellphone = ?, email = ? where cpf = ?;";
+				     stm2 = c.prepareStatement(query2);
+					stm2.setString(1,pacient.getName());
+					
+					//stm2.setString(2, pacient.getPhone());
+					stm2.setString(2, pacient.getCellphone());
+					stm2.setString(3, pacient.getEmail());
+					stm2.setString(4, pacient.getCpf());
+				}
+				stm2.executeUpdate();
+			}
+			
+			String query3 = "UPDATE appointment SET fk_cpfPacient = ? WHERE id = ?;";
+			
+			PreparedStatement stm3 = c.prepareStatement(query3);
+			stm3.setString(1, pacient.getCpf());
+			stm3.setInt(2, pacient.getDoctor().getAppointment().getId());
+			//stm2.setString(3,pacient.getDoctor().getCrm());
+			stm3.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new RuntimeException("Nao foi possivel conectar", e);
+		}
+	}
+
+	public HeathInsurance getAppointmentByCPF(String cpf) {
+		Appointment ap = new Appointment();
+		HeathInsurance hi = new HeathInsurance();
+		Doctor doc = new Doctor();
+		List<Doctor> docList = new ArrayList<Doctor>();
+		List<Appointment> apList = new ArrayList<Appointment>();
+		
+		try (Connection c = DriverManager.getConnection("jdbc:postgresql://localhost/appointment", "postgres",
+				"vilvert01")) {
+			String query = "SELECT HealthInsurance.name AS nameHi, doctor.name AS nameDoc, doctor.crm, appointment.dateandhour, appointment.id\n" + 
+					"FROM (appointment\n" + 
+					"INNER JOIN doctor ON appointment.fk_crmdoctor = doctor.crm) \n" + 
+					"INNER JOIN HealthInsurance ON HealthInsurance.id = appointment.fk_idheathIns where appointment.fk_cpfPacient=?;";
+			PreparedStatement stm = c.prepareStatement(query);
+			stm.setString(1, cpf);
+			
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				doc = new Doctor();
+				hi = new HeathInsurance();
+				ap = new Appointment();
+				hi.setName(rs.getString("nameHi"));
+				
+				doc.setName(rs.getString("nameDoc"));
+				doc.setCrm(rs.getString("crm"));
+				ap.setId(rs.getInt("id"));
+				ap.setDate(rs.getString("dateandhour").substring(0,10));
+				ap.setHour(rs.getString("dateandhour").substring(11,16));
+				apList.add(ap);
+				docList.add(doc);
+				doc.setAppointment(ap);
+				hi.setDoctorList(docList);
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("Nao foi possivel conectar", e);
+		}
+		
+		
+		return hi;
+	}
+
+	public void insertAppointmentDoctor(HeathInsurance hi) {	
+		try (Connection c = DriverManager.getConnection("jdbc:postgresql://localhost/appointment", "postgres",
+				"vilvert01")) {
+			
+			String query = "select COUNT(*) from appointment  where fk_crmDoctor=? and dateAndHour=?";
+			PreparedStatement stm = c.prepareStatement(query);
+			stm.setString(1, hi.getDoctorList().get(0).getCrm());
+			stm.setString(2, "2017-11-01 17:30");
+			ResultSet rs = stm.executeQuery();
+			String query2 = "";
+			if(rs.next()) {
+				int soma = rs.getInt("count");
+				PreparedStatement stm2;
+				if (soma == 0) {
+					 query2 = "INSERT INTO appointment (dateAndHour, fk_crmDoctor, fk_idheathIns)\n"
+							+ "VALUES (?, ?, ?);\n" + "";
+					stm2 = c.prepareStatement(query2);
+					stm2.setString(1,hi.getDoctorList().get(0).getAppointment().getDate() + " "
+							+ hi.getDoctorList().get(0).getAppointment().getHour());
+					stm2.setString(2, hi.getDoctorList().get(0).getCrm());
+					stm2.setInt(3, hi.getId());
+					stm2.executeUpdate();
+				}
+			
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("Nao foi possivel conectar", e);
+		}
+	}
+	public void cancelAppointmentPacientById(Integer id) {		
+		try (Connection c = DriverManager.getConnection("jdbc:postgresql://localhost/appointment", "postgres",
+				"vilvert01")) {
+			String query = "UPDATE appointment SET fk_cpfPacient = NULL WHERE id = ?;";
+			PreparedStatement stm = c.prepareStatement(query);
+			stm.setInt(1, id);
+			stm.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new RuntimeException("Nao foi possivel conectar", e);
+		}
+	}
+	
+}

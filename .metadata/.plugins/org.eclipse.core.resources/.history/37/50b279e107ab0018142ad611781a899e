@@ -1,0 +1,52 @@
+package java.com.sabrina.interview.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.springframework.stereotype.Repository;
+
+import com.floppy.clinidario.model.Doctor;
+import com.floppy.clinidario.model.HeathInsurance;
+
+@Repository
+public class HealthInsuranceDAO {
+
+	static {
+		try {
+			Class.forName("org.postgresql.Driver");
+		} catch (ClassNotFoundException ex) {
+			Logger.getLogger(DoctorDAO.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+
+	public List<HeathInsurance> getHeathInsurance() {
+		HeathInsurance hi = new HeathInsurance();
+		List<HeathInsurance> heathInsuranceList = new ArrayList<HeathInsurance>();
+
+		try (Connection c = DriverManager.getConnection("jdbc:postgresql://localhost/appointment", "postgres",
+				"vilvert01")) {
+			String query = "SELECT * FROM healthinsurance";
+			PreparedStatement stm = c.prepareStatement(query);
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				hi = new HeathInsurance();
+				hi.setDiscount(rs.getDouble("discount"));
+				hi.setId(rs.getInt("id"));
+				hi.setName(rs.getString("name"));
+				heathInsuranceList.add(hi);
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException("Nao foi possivel conectar", e);
+		}
+		return heathInsuranceList;
+	}
+	
+	
+}
