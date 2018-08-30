@@ -22,7 +22,8 @@
 		
 		<div class="container">
 			<div>
-				<ul ng-repeat= "productsList in productsList.items">
+			<input type='text' size=35 ng-model='productSearch' placeholder="Search by product name" />
+				<ul ng-repeat= "productsList in productsList.items | filter: productSearch">
 					<img src="{{productsList.thumbnailImage}}" alt="product image">
 					<a href="productDetail.html" ng-click="getProductDetail(productsList.itemId)">{{productsList.name}}<br></il>
 				</ul>
