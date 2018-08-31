@@ -7,7 +7,7 @@
 		<div>
 			<input type='text' size=35 ng-model='categorySearch' placeholder="Search by category name" />
 			<ul ng-repeat= "category in categoriesList.categories | filter: categorySearch">
-				<a href="#/productsByCategory/{{category.id}}">{{category.id}} - {{category.name}}<br></a>
+				<a href="#/productsByCategory/{{category.id}}">{{category.name}}<br></a>
 			</ul>
 		</div> 
 	</div>
