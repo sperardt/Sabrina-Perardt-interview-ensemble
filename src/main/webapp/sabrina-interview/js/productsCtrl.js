@@ -1,9 +1,8 @@
 angular.module("SabrinaInterviewApp").controller("ProductsCtrl", function($scope, $routeParams, ProductsService){
   
-	$scope.categoryId = "1334134";
-	
   //get all categories from Service
   $scope.getFirstPageOfProductsByCategory = function (categoryId){
+	  	$scope.categoryId = categoryId;
 		ProductsService.getFirstPageOfProductsByCategory(categoryId).then(function(data){
 			$scope.productsList = data.data.items;
 		}).catch(function (err){
@@ -16,6 +15,7 @@ angular.module("SabrinaInterviewApp").controller("ProductsCtrl", function($scope
 		ProductsService.getFirstPageOfProductsByCategory($routeParams.categoryId).then(function(data){
 			var itemsList = data.data.items;
 			for (var i=0; i< itemsList.length; i++){
+				console.log(itemsList[i].itemId + "==="+parseInt(productId))
 				if(itemsList[i].itemId === parseInt(productId)){
 					$scope.productDetail = itemsList[i];
 					return $scope.productDetail;
