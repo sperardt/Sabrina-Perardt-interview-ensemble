@@ -1,10 +1,14 @@
 angular.module("SabrinaInterviewApp").controller("CategoryCtrl", function($scope, CategoryService){
   var scope = $scope;
-  getAllCategories();
+ // getAllCategories();
   
   //get all categories from Service
-  function getAllCategories(){
-		$scope.categoriesList = CategoryService.getAllCategories();
+  $scope.getAllCategories = function (){
+		CategoryService.getAllCategories().then(function(data){
+			$scope.categoriesList = data.data;
+		}).catch(function (err){
+			console.log("Something is wrong");
+		})
 	};
 	
 });

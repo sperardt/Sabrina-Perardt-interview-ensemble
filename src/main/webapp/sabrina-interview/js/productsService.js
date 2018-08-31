@@ -9,7 +9,7 @@ angular.module('SabrinaInterviewApp').factory('ProductsService', function($http,
 
     return factory;
 
-    function getFirstPageOfProductsByCategory(query, id){
-    	return $http.get(WALMART_API_URI+'search?apiKey='+API_KEY+"&query="+query+"&categoryId="+id);
+    function getFirstPageOfProductsByCategory(id){
+    	return $http.get(WALMART_API_URI+'paginated/items?category=' + id + '&count=10' + '&apiKey=' + API_KEY + '&format=json');
     }
 });

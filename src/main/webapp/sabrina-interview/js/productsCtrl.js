@@ -1,21 +1,35 @@
-angular.module("SabrinaInterviewApp").controller("ProductsCtrl", function($scope, ProductsService){
-  getFirstPageOfProductsByCategory("1334134");
+angular.module("SabrinaInterviewApp").controller("ProductsCtrl", function($scope, $routeParams, ProductsService){
   
+	$scope.categoryId = "1334134";
+	
   //get all categories from Service
-  function getFirstPageOfProductsByCategory(categoryId){
-		$scope.productsList =ProductsService.getFirstPageOfProductsByCategory(categoryId);
+  $scope.getFirstPageOfProductsByCategory = function (categoryId){
+		ProductsService.getFirstPageOfProductsByCategory(categoryId).then(function(data){
+			$scope.productsList = data.data.items;
+		}).catch(function (err){
+			console.log("Something is wrong");
+		})
 	};
 	
+	//get product detail using an id
 	$scope.getProductDetail = function (productId){
-		var itemsList = $scope.productsList.items;
-		for (var i=0; i< itemsList.length; i++){
-			if(itemsList[i].itemId === productId){
-				console.log(itemsList[i]);
-				$scope.productDetail = itemsList[i];
-				return $scope.productDetail;
+		ProductsService.getFirstPageOfProductsByCategory($routeParams.categoryId).then(function(data){
+			var itemsList = data.data.items;
+			for (var i=0; i< itemsList.length; i++){
+				if(itemsList[i].itemId === parseInt(productId)){
+					$scope.productDetail = itemsList[i];
+					return $scope.productDetail;
+				}
 			}
-		}
-		//$scope.productDetail = $scope.productsList.items.forEach('itemId').indexOf(productId);
-		//console.log($scope.productDetail);
+			
+		}).catch(function (err){
+			console.log("Something is wrong");
+		})
 	}
+	
+	$scope.getFirstPageOfProductsByCategory($routeParams.idCategory);
+	
+	if ($routeParams && $routeParams.idProduct){
+		$scope.getProductDetail($routeParams.idProduct);
+	  }
 });

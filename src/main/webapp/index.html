@@ -10,26 +10,12 @@
     	<script src="sabrina-interview/js/app.js"></script>
 		<script src="sabrina-interview/js/categoryCtrl.js"></script>
 	 	<script src="sabrina-interview/js/categoryService.js"></script>
-	 	
+	 	<script src="sabrina-interview/js/productsCtrl.js"></script>
+	 	<script src="sabrina-interview/js/productsService.js"></script>
     	<title>Sabrina P. Interview</title>
   </head>
   
-  <body >
-  	<h1>Sabrina Perardt Interview</h1>
-  	
-  	<h2> Choose an option:</h2>
-	<table>
-		<tr>
-			<td>
-				<a class="btn btn-link" href="sabrina-interview/views/allCategories.html">All categories</a>
-	   		</td>
-		</tr>
-		
-	 	  <tr>
-	  		<td>
-	   			<a class="btn btn-link" href="sabrina-interview/views/productsByCategory.html">See first page of product list by category</a>
-	   		</td>
-	 	</tr>
-	</table>
+  <body>
+  		<div ng-view></div> 
   </body>
 </html>
