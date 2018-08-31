@@ -15,7 +15,6 @@ angular.module("SabrinaInterviewApp").controller("ProductsCtrl", function($scope
 		ProductsService.getFirstPageOfProductsByCategory($routeParams.categoryId).then(function(data){
 			var itemsList = data.data.items;
 			for (var i=0; i< itemsList.length; i++){
-				console.log(itemsList[i].itemId + "==="+parseInt(productId))
 				if(itemsList[i].itemId === parseInt(productId)){
 					$scope.productDetail = itemsList[i];
 					return $scope.productDetail;
